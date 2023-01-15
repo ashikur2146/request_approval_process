@@ -112,3 +112,26 @@ public class Test {
 	}
 }
 ```
+# Things to remember
+
+ReviewerModel class is the class which is considered to be the Reviewer in the real world example. So the ReviewerModel class could be Employee class or User class or Manager class in your project. Just to ensure that the ```hashCode()``` and the ```equals()``` methods are overriden in each of your Reviewer model class.
+
+```java
+@Override
+public int hashCode() {
+	return Objects.hash(id, name); // auto generated hashcode method is fine, you don't need to change that
+}
+
+@Override
+public boolean equals(Object obj) {
+	if (this == obj)
+		return true;
+	if (obj == null)
+		return false;
+	if (getClass() != obj.getClass())
+		return false;
+	ReviewerModel other = (ReviewerModel) obj;
+	return id == other.id; // this line is important as the reviewer identity will be validated based on its unique id not by any other property, 
+	                       // so be sure to understand that, if you have employeeId, or ManagerId, or UserId as an unique identifier in your project, then this 			           // statement would be employeeId == other.employeeId or managerId == other.managerId like that.
+}
+```

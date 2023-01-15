@@ -7,12 +7,12 @@ This library is implemented using java 1.8 and will support any java version fro
 
 1. clone the project on your local machine with git clone command
 2. navigate to the project directory
-3. inside the libs directory you will find the approval.jar
+3. inside the project directory you will find the approval-process-1.0.0.jar
 4. copy the jar file
 5. create a folder location inside your project's resource directory, for example, /src/resources/libs/
-6. paste the approval.jar file inside the libs directory
+6. paste the jar file inside your created directory
 7. it is assumed that your are using a build tool for your project i.e. maven or gradle
-8. if so, then add the dependency path inside your pom.xml for maven, or build.gradle file for a gradle project
+8. if so, then add the dependency path inside your pom.xml for maven, or build.gradle file for a gradle project. In case you are not using any build tool just add the jar file as an external dependency to your project
 9. update the project
 10. you are good to go!
 

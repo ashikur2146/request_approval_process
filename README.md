@@ -17,3 +17,14 @@ Just a disclaimer before diving into the how to guide, this library is not avail
 9. update the project
 10. you are good to go!
 
+# As a maven dependency
+
+```maven
+<dependency>
+			<groupId>approval.process</groupId>
+			<artifactId>approval-process</artifactId>
+			<version>1.0.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/resources/libs/approval-process-1.0.0.jar</systemPath>
+</dependency>
+```

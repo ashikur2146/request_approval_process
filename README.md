@@ -131,7 +131,10 @@ public boolean equals(Object obj) {
 	if (getClass() != obj.getClass())
 		return false;
 	ReviewerModel other = (ReviewerModel) obj;
-	return id == other.id; // this line is important as the reviewer identity will be validated based on its unique id not by any other property, 
-	                       // so be sure to understand that, if you have employeeId, or ManagerId, or UserId as an unique identifier in your project, then this 			           // statement would be employeeId == other.employeeId or managerId == other.managerId like that.
+	return id == other.id; // this line is important as the reviewer identity will be validated
+	                       // based on its unique id not by any other property, 
+	                       // so be sure to understand that, if you have employeeId, or ManagerId, or UserId
+			       // as an unique identifier in your project, then this 			           
+			       // statement would be employeeId == other.employeeId or managerId == other.managerId like that.
 }
 ```

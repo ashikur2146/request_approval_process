@@ -27,7 +27,7 @@ This library is implemented using java 1.8 and will support any java version fro
 	<systemPath>${project.basedir}/src/resources/libs/approval-process-1.0.0.jar</systemPath>
 </dependency>
 ```
-# How to test the code
+# Example code
 
 ```java
 import java.util.Objects;

@@ -27,3 +27,88 @@ This library is implemented using java 1.8 and will support any java version fro
 	<systemPath>${project.basedir}/src/resources/libs/approval-process-1.0.0.jar</systemPath>
 </dependency>
 ```
+# How to test the code
+
+```java
+import java.util.Objects;
+import java.util.Optional;
+
+import approval.process.ApprovalWrapper;
+import approval.process.RequestLifeCycle;
+import approval.process.Reviewer;
+import approval.process.Step;
+
+public class Test {
+
+	private static class ReviewerModel {
+		private long id;
+		private String name;
+
+		public ReviewerModel(long id, String name) {
+			super();
+			this.id = id;
+			this.name = name;
+		}
+
+		@Override
+		public int hashCode() {
+			return Objects.hash(id, name);
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			ReviewerModel other = (ReviewerModel) obj;
+			return id == other.id;
+		}
+	}
+
+	public static void main(String[] args) {
+		ApprovalWrapper approvalWrapper = new ApprovalWrapper();
+		ReviewerModel rm1 = new ReviewerModel(1, "R1");
+		ReviewerModel rm2 = new ReviewerModel(2, "R2");
+		ReviewerModel rm3 = new ReviewerModel(3, "R3");
+		Reviewer<ReviewerModel> r1 = approvalWrapper.addReviewer(rm1);
+		Reviewer<ReviewerModel> r2 = approvalWrapper.addReviewer(rm2);
+		Reviewer<ReviewerModel> r3 = approvalWrapper.addReviewer(rm3);
+
+		approvalWrapper.createApprovalStep(r1);
+		approvalWrapper.createApprovalStep(r2);
+		approvalWrapper.createApprovalStep(r3);
+		RequestLifeCycle requestLifeCycle = approvalWrapper.requestProcessLifeCycle();
+		System.out.println("request life cycle: " + requestLifeCycle);
+
+		Optional<Step<?, ?>> optionalStep = requestLifeCycle.getValidatedCurrentStep(r1);
+		if (optionalStep.isPresent()) {
+			Step<?, ?> currentStep = optionalStep.get();
+			currentStep.accept();
+		}
+		// approvalWrapper.removeStep(approvalWrapper.addReviewer(1L),
+		// requestLifeCycle);
+		System.out.println("after approval by 1L: " + requestLifeCycle);
+		System.out.println("is completed?: " + requestLifeCycle.isComplete());
+
+		Optional<Step<?, ?>> optionalStep2 = requestLifeCycle.getValidatedCurrentStep(r2);
+		if (optionalStep2.isPresent()) {
+			Step<?, ?> currentStep = optionalStep2.get();
+			currentStep.accept();
+		}
+		System.out.println("after approval by 2L: " + requestLifeCycle);
+		System.out.println("is completed?: " + requestLifeCycle.isComplete());
+
+		Optional<Step<?, ?>> optionalStep3 = requestLifeCycle.getValidatedCurrentStep(r3);
+		if (optionalStep3.isPresent()) {
+			Step<?, ?> currentStep = optionalStep3.get();
+			currentStep.accept();
+		}
+
+		System.out.println("after approval by 3L: " + requestLifeCycle);
+		System.out.println("is completed?: " + requestLifeCycle.isComplete());
+	}
+}
+```

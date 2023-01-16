@@ -27,6 +27,16 @@ This library is implemented using java 1.8 and will support any java version fro
 	<systemPath>${project.basedir}/src/resources/libs/approval-process-1.0.0.jar</systemPath>
 </dependency>
 ```
+
+# Add as a gradle dependency
+
+```gradle
+dependencies {
+    implementation(files("/src/main/resources/libs/approval-process-1.0.0.jar"))
+}
+```
+
+
 # Example code
 
 ```java

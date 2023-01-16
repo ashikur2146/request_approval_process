@@ -9,7 +9,7 @@ This library is digitally signed. In order to verify its authenticity openup a t
 
 ```jarsigner -verify approval-process-1.0.0.jar```
 
-You will find the output similar to below if it the library is verified:
+You will find the output similar to below if it the library is verified, please note that certificate was not issued by any trusted Certificate authority.
 
 ```
 jar verified.

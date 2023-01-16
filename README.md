@@ -122,7 +122,7 @@ public class Test {
 	}
 }
 ```
-# Things to remember
+# Things to follow
 
 ReviewerModel class is the class which is considered to be the Reviewer in the real world example. So the ReviewerModel class could be Employee class or User class or Manager class in your project. Just to ensure that the ```hashCode()``` and the ```equals()``` methods are overriden in each of your Reviewer model class.
 

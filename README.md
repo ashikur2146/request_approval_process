@@ -3,6 +3,25 @@ This library gives you the ability to implement a generalized approval process i
 
 This library is implemented using java 1.8 and will support any java version from 1.8 onwards. You can also extend its functionality and make it serve your needs within its boundary. Just a disclaimer before diving into the how to guide, this library is not available on maven central so follow the steps to add this into your current project.
 
+# Signature verification
+
+This library is digitally signed. In order to verify its authenticity openup a terminal within the directory and run the following command
+
+```jarsigner -verify approval-process-1.0.0.jar```
+
+You will find the output similar to below if it the library is verified:
+
+```
+jar verified.
+
+Warning:
+This jar contains entries whose certificate chain is invalid. Reason: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+This jar contains entries whose signer certificate is self-signed.
+This jar contains entries whose signer certificate will expire within six months.
+This jar contains signatures that do not include a timestamp. Without a timestamp, users may not be able to validate this jar after any of the signer certificates expire (as early as 2023-07-15).
+POSIX file permission and/or symlink attributes detected. These attributes are ignored when signing and are not protected by the signature.
+```
+
 # How to guide
 
 1. clone the project on your local machine with git clone command

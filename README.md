@@ -14,12 +14,7 @@ You will find the output similar to below if it the library is verified, please 
 ```
 jar verified.
 
-Warning:
-This jar contains entries whose certificate chain is invalid. Reason: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
-This jar contains entries whose signer certificate is self-signed.
-This jar contains entries whose signer certificate will expire within six months.
-This jar contains signatures that do not include a timestamp. Without a timestamp, users may not be able to validate this jar after any of the signer certificates expire (as early as 2023-07-15).
-POSIX file permission and/or symlink attributes detected. These attributes are ignored when signing and are not protected by the signature.
+....
 ```
 
 # How to guide
@@ -167,3 +162,10 @@ public boolean equals(Object obj) {
 			       // statement would be employeeId == other.employeeId or managerId == other.managerId like that.
 }
 ```
+# What is next
+
+This library could be compatible with other programming languages also through the provided java support library of the language.
+For example, 
+
+* py4J provides java support for python programmers (explore here: https://www.py4j.org/)
+* java support for php developers (https://github.com/php-java/php-java)

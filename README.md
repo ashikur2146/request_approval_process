@@ -162,10 +162,14 @@ public boolean equals(Object obj) {
 			       // statement would be employeeId == other.employeeId or managerId == other.managerId like that.
 }
 ```
-# What is next
+# Integration with other programming languages
 
 This library could be compatible with other programming languages also through the provided java support library of the language.
 For example, 
 
 * py4J provides java support for python programmers (explore here: https://www.py4j.org/)
 * java support for php developers (https://github.com/php-java/php-java)
+
+# What's Next
+
+If you find this library helpful by any chance and want to integrate in your project but need assistance, then feel free to book an appointment at ashikur2146@gmail.com

@@ -38,7 +38,7 @@ jar verified.
 	<artifactId>approval-process</artifactId>
 	<version>1.0.0</version>
 	<scope>system</scope>
-	<systemPath>${project.basedir}/src/resources/libs/approval-process-1.0.0.jar</systemPath>
+	<systemPath>${project.basedir}/src/main/resources/libs/approval-process-1.0.0.jar</systemPath>
 </dependency>
 ```
 

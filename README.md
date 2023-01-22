@@ -170,6 +170,12 @@ For example,
 * py4J provides java support for python programmers (explore here: https://www.py4j.org/)
 * java support for php developers (https://github.com/php-java/php-java)
 
+# How to get the source code
+
+In order to access and update the code you need to decompile it. I would suggest to use free online decompiler for that, such as,
+http://www.javadecompilers.com/
+
+
 # What's Next
 
 If you find this library helpful by any chance and want to integrate in your project but need assistance, then feel free to book an appointment at ashikur2146@gmail.com

@@ -172,7 +172,7 @@ For example,
 
 # How to get the source code
 
-In order to access and update the code you need to decompile it. I would suggest to use free online decompiler for that, such as,
+If you are willing to continue with the provided functionality, then all you need is to add the dependency in your project and integrate with your implementation. Otherwise, you need to decompile it. I would suggest to use free online decompiler for that, such as,
 http://www.javadecompilers.com/
 
 

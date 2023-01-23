@@ -162,6 +162,16 @@ public boolean equals(Object obj) {
 			       // statement would be employeeId == other.employeeId or managerId == other.managerId like that.
 }
 ```
+output:
+```
+request life cycle: RequestLifeCycle [steps=[Step [t=null, reviewer=Reviewer [reviewer=1], checkList=null, status=PENDING, date=Mon Jan 23 20:54:50 BDT 2023, approvalType=null, steps=null], Step [t=null, reviewer=Reviewer [reviewer=2], checkList=null, status=PENDING, date=Mon Jan 23 20:54:50 BDT 2023, approvalType=null, steps=null], Step [t=null, reviewer=Reviewer [reviewer=3], checkList=null, status=PENDING, date=Mon Jan 23 20:54:50 BDT 2023, approvalType=null, steps=null]], isComplete=false, isExpired=false, remarks=]
+after approval by 1L: RequestLifeCycle [steps=[Step [t=null, reviewer=Reviewer [reviewer=1], checkList=null, status=ACCEPTED, date=Mon Jan 23 20:54:50 BDT 2023, approvalType=null, steps=null], Step [t=null, reviewer=Reviewer [reviewer=2], checkList=null, status=PENDING, date=Mon Jan 23 20:54:50 BDT 2023, approvalType=null, steps=null], Step [t=null, reviewer=Reviewer [reviewer=3], checkList=null, status=PENDING, date=Mon Jan 23 20:54:50 BDT 2023, approvalType=null, steps=null]], isComplete=false, isExpired=false, remarks=]
+is completed?: false
+after approval by 2L: RequestLifeCycle [steps=[Step [t=null, reviewer=Reviewer [reviewer=1], checkList=null, status=ACCEPTED, date=Mon Jan 23 20:54:50 BDT 2023, approvalType=null, steps=null], Step [t=null, reviewer=Reviewer [reviewer=2], checkList=null, status=ACCEPTED, date=Mon Jan 23 20:54:50 BDT 2023, approvalType=null, steps=null], Step [t=null, reviewer=Reviewer [reviewer=3], checkList=null, status=PENDING, date=Mon Jan 23 20:54:50 BDT 2023, approvalType=null, steps=null]], isComplete=false, isExpired=false, remarks=]
+is completed?: false
+after approval by 3L: RequestLifeCycle [steps=[Step [t=null, reviewer=Reviewer [reviewer=1], checkList=null, status=ACCEPTED, date=Mon Jan 23 20:54:50 BDT 2023, approvalType=null, steps=null], Step [t=null, reviewer=Reviewer [reviewer=2], checkList=null, status=ACCEPTED, date=Mon Jan 23 20:54:50 BDT 2023, approvalType=null, steps=null]], isComplete=true, isExpired=false, remarks=]
+is completed?: true
+```
 # Integration with other programming languages
 
 This library could be compatible with other programming languages also through the provided java support library of the language.

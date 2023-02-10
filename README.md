@@ -182,4 +182,6 @@ For example,
 
 # What's Next
 
-If you find this library helpful by any chance and want to integrate in your project but need assistance, then feel free to book an appointment at ashikur2146@gmail.com
+If you find this library helpful by any chance and want to integrate in your project but need assistance, then let's talk:
+
+linkedin: shorturl.at/gpwD8

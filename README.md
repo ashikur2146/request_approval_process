@@ -54,8 +54,12 @@ dependencies {
 # Example code
 
 ```java
+package approval.process.test;
+
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 import approval.process.ApprovalWrapper;
 import approval.process.RequestLifeCycle;
@@ -90,8 +94,15 @@ public class Test {
 			ReviewerModel other = (ReviewerModel) obj;
 			return id == other.id;
 		}
+
+		@Override
+		public String toString() {
+			return "ReviewerModel [id=" + id + ", name=" + name + "]";
+		}
+
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void main(String[] args) {
 		ApprovalWrapper approvalWrapper = new ApprovalWrapper();
 		ReviewerModel rm1 = new ReviewerModel(1, "R1");
@@ -133,6 +144,104 @@ public class Test {
 
 		System.out.println("after approval by 3L: " + requestLifeCycle);
 		System.out.println("is completed?: " + requestLifeCycle.isComplete());
+
+		/*** 
+		 * What if one step has multiple reviewers and
+		 * approval from one of those reviewers forward
+		 * the request to the next step?
+		 * 
+		 * version 1.0.0 doesn't have explicit support for this scenario
+		 * however, there is a work around. the following example is a
+		 * demonstration of that use case. 
+		 * ***/
+		
+		ApprovalWrapper approvalWrapperFlexible = new ApprovalWrapper();
+		
+		ReviewerModel reviewer01 = new ReviewerModel(1, "R1");
+		ReviewerModel reviewer021 = new ReviewerModel(2, "R21");
+		ReviewerModel reviewer022 = new ReviewerModel(3, "R22");
+		ReviewerModel reviewer03 = new ReviewerModel(4, "R3");
+		
+		Reviewer<ReviewerModel> rv01 = approvalWrapperFlexible.addReviewer(reviewer01);
+		Reviewer<ReviewerModel> rv021 = approvalWrapperFlexible.addReviewer(reviewer021);
+		Reviewer<ReviewerModel> rv022 = approvalWrapperFlexible.addReviewer(reviewer022);
+		Reviewer<ReviewerModel> rv03 = approvalWrapperFlexible.addReviewer(reviewer03);
+		
+		Step<Long, Reviewer<ReviewerModel>> step1 = new Step(rv01);
+		Step<Long, Reviewer<ReviewerModel>> step21 = new Step(rv021);
+		Step<Long, Reviewer<ReviewerModel>> step22 = new Step(rv022);
+		Set<Step<Long, Reviewer<ReviewerModel>>> steps = new HashSet<>();
+		steps.add(step21);
+		steps.add(step22);
+		Step<Long, Reviewer<ReviewerModel>> step02 = new Step<>(new Reviewer(-1));
+		step02.setSteps(steps);
+		Step<Long, Reviewer<ReviewerModel>> step3 = new Step(rv03);
+
+		approvalWrapperFlexible.getSteps().add(step1);
+		approvalWrapperFlexible.getSteps().add(step02);
+		approvalWrapperFlexible.getSteps().add(step3);
+
+		RequestLifeCycle requestLifeCycle2 = approvalWrapperFlexible.requestProcessLifeCycle();
+		System.out.println("\n\n\nrequest life cycle for flexible approval process: " + requestLifeCycle2);
+		Optional<Step<?, ?>> optionalStep__ = requestLifeCycle2.getValidatedCurrentStep(rv01);
+		if (optionalStep__.isPresent()) {
+			Step<?, ?> step = optionalStep__.get();
+			step.accept();
+			System.out.println("after 1st approval: " + requestLifeCycle2);
+			System.out.println("is completed?: " + requestLifeCycle2.isComplete());
+		} else {
+			if(step1.getSteps() != null) {
+				step1.getSteps().forEach(s -> {
+					if (s.getReviewer().equals(rv01)) {
+						s.accept();
+						step1.accept();
+						return;
+					}
+				});
+			}
+			System.out.println("after 1st approval: " + requestLifeCycle2);
+			System.out.println("is completed?: " + requestLifeCycle2.isComplete());
+		}
+		
+		Optional<Step<?, ?>> optionalStep__2 = requestLifeCycle2.getValidatedCurrentStep(rv022);
+		if (optionalStep__2.isPresent()) {
+			Step<?, ?> step = optionalStep__2.get();
+			step.accept();
+			System.out.println("after 2nd approval: " + requestLifeCycle2);
+			System.out.println("is completed?: " + requestLifeCycle2.isComplete());
+		} else {
+			if(step02.getSteps() != null) {
+				step02.getSteps().forEach(s -> {
+					if (s.getReviewer().equals(rv022)) {
+						s.accept();
+						step02.accept();
+						return;
+					}
+				});
+			}
+			System.out.println("after 2nd approval: " + requestLifeCycle2);
+			System.out.println("is completed?: " + requestLifeCycle2.isComplete());
+		}
+		
+		Optional<Step<?, ?>> optionalStep__3 = requestLifeCycle2.getValidatedCurrentStep(rv03);
+		if (optionalStep__3.isPresent()) {
+			Step<?, ?> step = optionalStep__3.get();
+			step.accept();
+			System.out.println("after 3rd approval: " + requestLifeCycle2);
+			System.out.println("is completed?: " + requestLifeCycle2.isComplete());
+		} else {
+			if(step3.getSteps() != null) {
+				step3.getSteps().forEach(s -> {
+					if (s.getReviewer().equals(rv03)) {
+						s.accept();
+						step3.accept();
+						return;
+					}
+				});
+			}
+			System.out.println("after 3rd approval: " + requestLifeCycle2);
+			System.out.println("is completed?: " + requestLifeCycle2.isComplete());
+		}
 	}
 }
 ```
